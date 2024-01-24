@@ -7,10 +7,11 @@ import 'dart:convert';
 class ChatRepository{
   var remoteChatDataSource = UserDataSource();
 
-  Future<List> getRooms(String username) async {
+  Future<List<String>> getRooms(String username) async {
     var listChatRoom =
     jsonDecode(await remoteChatDataSource.getUserData(username))['data'];
-    return listChatRoom;
+    List<String> listUserData = List<String>.from(listChatRoom);
+    return listUserData;
   }
 
 
