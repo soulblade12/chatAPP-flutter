@@ -1,19 +1,28 @@
-class UserList{
-  final Map<String, Map<String, List<String>>> users;
+class Message{
+  String nama;
+  String id;
+  String Pesan;
 
-  UserList({required this.users});
 
-  factory UserList.fromJson(Map<String, dynamic> json) {
-    return UserList(
-      users: Map<String, Map<String, List<String>>>.from(json).map(
-            (key, value) => MapEntry(
-          key,
-          {
-            'rooms': List<String>.from(value['rooms']!),
-          },
-        ),
-      ),
-    );
+  Message({required this.nama, required this.id, required this.Pesan});
+
+  factory Message.fromJson(Map<String, dynamic> json) {
+    return switch (json) {
+    {
+      'nama': String nama,
+    'id': String id,
+    'Pesan': String Pesan
+    } =>
+    Message(nama: nama, id: id, Pesan: Pesan),
+    _ => throw const FormatException('Gagal membuat post')
+  };
   }
-}
+  Map<String, dynamic> toJson() {
+    return {
+      'nama': this.nama,
+      'id': this.id,
+      'Pesan': this.Pesan
+    };
+  }
 
+}

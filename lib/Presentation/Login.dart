@@ -4,9 +4,6 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class LoginPage extends StatefulWidget{
-
-
-
   @override
   State<StatefulWidget> createState() {
     return _LoginPageState();
@@ -42,6 +39,7 @@ class _LoginPageState extends State<LoginPage>{
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.cyan,
+
       body: Column(
         // mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -87,7 +85,7 @@ class _LoginPageState extends State<LoginPage>{
                         ElevatedButton(
                             child: Text('Login'),
                             onPressed: () {
-                              Navigator.pushReplacement(context,
+                              Navigator.push(context,
                               MaterialPageRoute(builder: (context) => HomePage(
                                   username: _usernameController.text)));
                                 }),

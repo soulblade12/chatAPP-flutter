@@ -5,37 +5,48 @@ class UserDataSource {
 
     static const URL = 'http://127.0.0.1:8080';
 
-    Future<String> getUserData(String username) async{
-      var response = await http.get(Uri.parse("${URL}/api/user/$username"));
-
+    Future<String> getRoomChat(String username) async{
+      var response = await http.get(Uri.parse('${URL}/api/room/${username}'));
       if (response.statusCode == 200) {
-        print('${response.body}');
+        // print('${response.body}');
         return (response.body);
       } else {
         throw Exception('Failed to load user data');
       }
     }
 
-    Future<String> getChatData(String id) async {
-      final response = await http.get(Uri.parse('${URL}/api/chat/$id'));
-
+    Future<String> getUser(String username) async{
+      var response = await http.get(Uri.parse('${URL}/api/user/${username}'));
       if (response.statusCode == 200) {
-        return json.decode(response.body);
+        // print('${response.body}');
+        return (response.body);
       } else {
-        throw Exception('Failed to load chat data');
+        throw Exception('Failed to load user data');
       }
     }
 
-    Future<String> getRoomData(String username) async {
-      final response = await http.get(Uri.parse('${URL}/api/room/$username'));
-
+    Future<String> getChat(String id) async{
+      var response = await http.get(Uri.parse('${URL}/api/chat/${id}'));
       if (response.statusCode == 200) {
-        print('${response.body}');
-        return json.decode(response.body)['data'];
+        // print('${response.body}');
+        return (response.body);
       } else {
-        throw Exception('Failed to load room data');
+        throw Exception('Failed to load user data');
       }
     }
 
-
+      Future<String> createMessage(Map<String, dynamic> message) async {
+      var response = await http.post(
+        Uri.parse('${URL}/api/chat'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, dynamic>{
+          'nama': message['nama'],
+          'id': message['id'],
+          'Pesan': message['Pesan']
+        }),
+      );
+      return jsonDecode(response.body)['data'];
+    }
 }

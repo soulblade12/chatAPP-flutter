@@ -1,9 +1,17 @@
 import 'package:mini_project_chat/Data/repository.dart';
 
-class GetChatRoom{
+class GetUser{
   var repository = ChatRepository();
 
-  Future<List<String>> execute(String username) {
-    return repository.getRooms(username);
+  Future<List> execute(username){
+    return repository.getUser(username);
+  }
+}
+
+class GetRoomChat{
+  var repository = ChatRepository();
+
+  Future<List> execute(username){
+    return repository.getRoomChat(username);
   }
 }
