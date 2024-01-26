@@ -36,17 +36,16 @@ class UserDataSource {
     }
 
       Future<String> createMessage(Map<String, dynamic> message) async {
-      var response = await http.post(
-        Uri.parse('${URL}/api/chat'),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-        },
-        body: jsonEncode(<String, dynamic>{
-          'nama': message['nama'],
-          'id': message['id'],
-          'Pesan': message['Pesan']
-        }),
-      );
-      return jsonDecode(response.body)['data'];
-    }
+        var response = await http.post(Uri.parse('${URL}/api/chat'),
+            headers: <String, String>{
+              'Content-Type': 'application/json; charset=UTF-8',
+            },
+            body: jsonEncode(<String, dynamic>{
+              'id': message['id'],
+              'from': message['nama'],
+              'text': message['Pesan'],
+            }
+            ));
+        return response.body;
+      }
 }
